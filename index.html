@@ -10,6 +10,91 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Supabase JS Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        @media (max-width: 640px) {
+            header .header-row {
+                position: relative;
+                display: flex;
+                height: auto;
+                min-height: 6rem;
+                padding-top: 3.25rem;
+                padding-bottom: 0.75rem;
+            }
+
+            header .brand-wrap {
+                position: absolute;
+                top: 0.85rem;
+                left: 3rem;
+                right: 3rem;
+                text-align: center;
+            }
+
+            header .brand-icon {
+                position: absolute;
+                top: 0.55rem;
+                left: 0;
+            }
+
+            header .brand-title {
+                font-size: 1.1rem;
+                line-height: 1.15;
+            }
+
+            header .header-row > .flex.items-center.gap-3 {
+                display: contents;
+            }
+
+            header .header-row > .flex.items-center.gap-2 {
+                justify-content: center;
+                width: 100%;
+            }
+
+            header .mobile-menu-toggle {
+                position: absolute;
+                top: 0.55rem;
+                right: 0;
+            }
+
+            header .brand-title {
+                letter-spacing: 0.01em;
+            }
+
+            header .brand-subtitle {
+                display: none;
+            }
+
+            main {
+                padding-top: 1.25rem;
+                padding-bottom: 1.25rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            header .brand-title {
+                font-size: 1rem;
+            }
+
+            #role-badge {
+                max-width: 104px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #auth-btn-text {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
     <script>
         // Replace with your credentials from Supabase Dashboard > Project Settings > API
         const SUPABASE_URL = "https://nttqytfnpxlknoftcggo.supabase.co";
@@ -23,15 +108,15 @@
     <!-- TOP NAVBAR -->
     <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="header-row flex items-center justify-between h-16 gap-2">
                 <!-- Brand Title -->
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-indigo-700/60 rounded-xl border border-indigo-500/30">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="brand-icon p-2 bg-indigo-700/60 rounded-xl border border-indigo-500/30 shrink-0">
                         <i data-lucide="book-open" class="w-6 h-6 text-indigo-200"></i>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-base sm:text-lg tracking-wide leading-none text-white">St.Ephrem's Library</h1>
-                        <span class="text-[11px] text-indigo-300 font-medium">Library Catalog & Circulation Portal</span>
+                    <div class="brand-wrap min-w-0">
+                        <h1 class="brand-title font-bold text-base sm:text-lg tracking-wide leading-none text-white">St. Ephrem's Library</h1>
+                        <span class="brand-subtitle text-[11px] text-indigo-300 font-medium">Library Catalog & Circulation Portal</span>
                     </div>
                 </div>
 
@@ -41,7 +126,7 @@
                 </nav>
 
                 <!-- Auth Controls & Role Badge -->
-                <div class="flex items-center gap-2">
+                <div class="header-controls flex items-center gap-2">
                     <span id="role-badge" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-800 text-indigo-200 border border-indigo-700 flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span id="role-text">Public View</span>
@@ -52,7 +137,7 @@
                         <span id="auth-btn-text">Staff Login</span>
                     </button>
 
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-indigo-200 hover:text-white hover:bg-indigo-800 focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="mobile-menu-toggle md:hidden p-2 rounded-lg border border-indigo-700 text-indigo-200 hover:text-white hover:bg-indigo-800 focus:outline-none">
                         <i id="mobile-menu-icon" data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
